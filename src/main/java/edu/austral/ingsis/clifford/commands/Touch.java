@@ -19,7 +19,19 @@ public class Touch implements Command {
 
     @Override
     public CommandResult run(Node node) {
+        if (fileAlreadyExists(node, newFile)) {
+            return new TouchResult(message);
+        }
         node.addArchive(newFile);
         return new TouchResult(message);
+    }
+
+    private boolean fileAlreadyExists(Node node, File newFile) {
+        for (Node subArchive : node.getSubArchives()) {
+            if (subArchive.archive.getName().equals(newFile.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

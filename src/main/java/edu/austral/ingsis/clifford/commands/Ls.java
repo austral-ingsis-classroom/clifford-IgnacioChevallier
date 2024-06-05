@@ -50,6 +50,7 @@ public class Ls implements Command {
         StringBuilder message = new StringBuilder();
         if (subArchives == null) { return ""; }
         if (subArchives.size() == 1) { return message.append(subArchives.getFirst()).toString(); }
+        sort(subArchives);
         for (String name : subArchives) {
             message.append(name).append(" ");
         }
@@ -62,5 +63,19 @@ public class Ls implements Command {
             archivesName.add(node.archive.getName());
         }
         return archivesName;
+    }
+
+    private void sort(List<String> subArchives) {
+        subArchives.sort((s1, s2) -> {
+            boolean s1IsFile = s1.contains(".");
+            boolean s2IsFile = s2.contains(".");
+            if (s1IsFile && !s2IsFile) {
+                return 1;
+            } else if (!s1IsFile && s2IsFile) {
+                return -1;
+            } else {
+                return s1.compareTo(s2);
+            }
+        });
     }
 }
