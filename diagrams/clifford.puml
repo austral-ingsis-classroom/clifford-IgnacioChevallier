@@ -1,0 +1,21 @@
+@startuml
+interface Archive {
+    + name: String
+    + path: String
+    + owner: String
+}
+
+class Directory {
+    + add(Archive): void
+    + remove(Archive): void
+    + getArchives(): List<Archive>
+
+}
+
+class File {
+    + size: int
+}
+
+Directory --> Archive
+File --> Archive
+@enduml
