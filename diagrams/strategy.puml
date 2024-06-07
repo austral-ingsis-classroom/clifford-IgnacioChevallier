@@ -1,0 +1,48 @@
+@startuml
+class SistemaDeSalud {
+    - List<(Observer)> observers
+    - List<(Publisher)> publishers
+}
+
+interface Publisher {
+    + void subscribe(Observer)
+    + void unsubscribe(Observer)
+    + void notify()
+}
+
+class RitmoCardiaco implements Publisher {
+    + void subscribe(Observer)
+    + void unsubscribe(Observer)
+    + void notify()
+}
+
+class PresiónArterial implements Publisher {
+    + void subscribe(Observer)
+    + void unsubscribe(Observer)
+    + void notify()
+}
+class Temperatura implements Publisher {
+    + void subscribe(Observer)
+    + void unsubscribe(Observer)
+    + void notify()
+}
+Publisher --> Observer
+
+interface Observer {
+    + String name
+    + void update()
+}
+
+class Medico implements Observer {
+    + String name
+    + void update()
+}
+class Enfermera implements Observer {
+    + String name
+    + void update()
+}
+class Paciente implements Observer {
+    + String name
+    + void update()
+}
+@enduml
